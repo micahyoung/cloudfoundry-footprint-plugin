@@ -2,7 +2,6 @@ package parsers
 
 import (
 	"encoding/json"
-	"fmt"
 	"strings"
 )
 
@@ -33,7 +32,6 @@ func ParseAppUpdateEventResponse(appUpdateEventResponse []string) (apiEvent *API
 	if err != nil {
 		return nil, err
 	}
-	fmt.Printf("%#+v\n", wrapper)
 
 	if len(wrapper.Resources) == 0 {
 		return &APIEvent{}, nil
@@ -41,8 +39,6 @@ func ParseAppUpdateEventResponse(appUpdateEventResponse []string) (apiEvent *API
 
 	apiEvent = &APIEvent{}
 	for _, eventResource := range wrapper.Resources {
-		fmt.Printf("event: %#+v\n", eventResource)
-
 		apiEvent.LastUpdatedBy = eventResource.Entity.ActorUsername
 		apiEvent.LastUpdatedAt = eventResource.Metadata.CreatedAt
 	}

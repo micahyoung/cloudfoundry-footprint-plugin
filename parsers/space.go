@@ -3,17 +3,18 @@ package parsers
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 	"strings"
 )
 
 type spaceWrapper struct {
-	Entity APISpace `json:"entity"`
+	Entity struct {
+		Name string `json:"name"`
+	} `json:"entity"`
 }
 
 // APISpace data
 type APISpace struct {
-	Name string `json:"name"`
+	Name string
 }
 
 // ParseSpaceResponse parses json API response and returns data
@@ -25,12 +26,14 @@ func ParseSpaceResponse(spaceResponse []string) (apiSpace *APISpace, err error) 
 	if err != nil {
 		return nil, err
 	}
-	fmt.Printf("%#+v\n", wrapper)
 
-	if (wrapper.Entity == APISpace{}) {
+	if wrapper.Entity.Name == "" {
 		return nil, errors.New("No space found")
 	}
-	apiSpace = &wrapper.Entity
+
+	apiSpace = &APISpace{
+		Name: wrapper.Entity.Name,
+	}
 
 	return apiSpace, nil
 }

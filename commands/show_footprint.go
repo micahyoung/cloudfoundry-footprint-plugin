@@ -17,7 +17,13 @@ func ShowFootprint(cliConnection plugin.CliConnection, writer io.Writer) (err er
 	}
 
 	for _, appData := range appsData {
-		fmt.Fprintf(writer, "%s / %s (%s) last pushed %s by %s\n", appData.AppName, appData.SpaceName, appData.AppState, appData.AppLastUpdatedAt, appData.AppLastUpdatedBy)
+		if appData.AppLastUpdatedAt != "" {
+			fmt.Fprintf(writer, "%s / %s (%s) last pushed on %s by %s\n", appData.AppName, appData.SpaceName, appData.AppState, appData.AppLastUpdatedAt, appData.AppLastUpdatedBy)
+
+		} else {
+			fmt.Fprintf(writer, "%s / %s (%s)\n", appData.AppName, appData.SpaceName, appData.AppState)
+		}
+
 	}
 	return nil
 }

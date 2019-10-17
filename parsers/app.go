@@ -3,7 +3,6 @@ package parsers
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 	"strings"
 )
 
@@ -43,8 +42,6 @@ func ParseAppsResponse(appsResponse []string) (apiApps []*APIApp, err error) {
 	}
 
 	for _, appResource := range wrapper.Resources {
-		fmt.Printf("resp: %#+v\n", appResource)
-
 		apiApp := &APIApp{
 			Name:      appResource.Entity.Name,
 			State:     appResource.Entity.State,

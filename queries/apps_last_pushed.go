@@ -62,7 +62,6 @@ func GetAppsLastPushed(cliConnection plugin.CliConnection) (appsData []*AppData,
 		appData.AppLastUpdatedBy = apiAppUpdateEvent.LastUpdatedBy
 		appData.AppLastUpdatedAt = apiAppUpdateEvent.LastUpdatedAt
 
-		fmt.Printf("App %+v\n", appData)
 		appsData = append(appsData, appData)
 	}
 

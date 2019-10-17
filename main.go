@@ -18,7 +18,7 @@ type FootprintPlugin struct {
 func (p *FootprintPlugin) Run(cliConnection plugin.CliConnection, args []string) {
 	out := os.Stdout
 	if args[0] == "footprint" {
-		fmt.Println("Running the footprint command")
+		fmt.Println("Gathering footprint data")
 		if err := commands.ShowFootprint(cliConnection, out); err != nil {
 			panic(err)
 		}
